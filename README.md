@@ -1,8 +1,6 @@
 # AI CHATBOT WITH AUTHENTICATION
 
-
 ## Installation and Setup
-
 ### Setting up .env
  Set Up Environment Variables. Create a .env file 
 ```  
@@ -35,4 +33,24 @@ GROQ_API_KEY="gsk_your_actual_groq_api_key_here"
         npm install
         npm run dev
 **Frontend App:** http://localhost:3000        
+
+## TECH-STACK
+
+### Frontend:
+- Next.js
+- React
+- Tailwind CSS
+- shadcn/ui
+
+### Backend 
+- FastAPI(python)
+
+### Database
+- SQLite
+
+### Authentication
+- JWT (JSON Web Token)
+
+### LLM 
+- Groq API (Llama-3.1-8b-instant model)
 
