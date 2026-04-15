@@ -54,3 +54,7 @@ GROQ_API_KEY="gsk_your_actual_groq_api_key_here"
 ### LLM 
 - Groq API (Llama-3.1-8b-instant model)
 
+## References:
+- backend: https://fastapi.tiangolo.com
+- frontend: https://github.com/ChrisCoder9000/ai-chatapp-with-memory-tutorial.git
+
