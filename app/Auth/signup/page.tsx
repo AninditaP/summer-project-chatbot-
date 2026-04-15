@@ -56,10 +56,10 @@ export default function SignupPage() {
         throw new Error(errorData.detail || "Failed to register user");
       }
 
-      // ➕ ADDED: Show success state and redirect to login page
+      
       setSuccess(true);
       setTimeout(() => {
-        router.push('/Auth/login'); // Redirect to login after a brief pause
+        router.push('/Auth/login'); 
       }, 1500);
       
     } catch (err) {
