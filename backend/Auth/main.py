@@ -7,10 +7,14 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 from database import init_db, get_user, create_user  
 from middleware import register_middlewares
+import os
+from dotenv import load_dotenv
 
-SECRET_KEY = "5cf76344c96265783c2a4c911d80d248dc260f126d93207a98b9a7bf2ab51e3c"          # Use an env var in real apps
+load_dotenv()
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY= os.getenv("SECRET_KEY")
 
 app= FastAPI(title="JWT Auth Demo (SQLite)")
 register_middlewares(app)
@@ -88,3 +92,4 @@ def read_me(current_user: UserPublic = Depends(get_current_user)):
 @app.on_event("startup")
 def on_startup():
     init_db()
+

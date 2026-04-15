@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fullstack AI Chatbot Application
 
-## Getting Started
 
-First, run the development server:
+This project is a full-stack chatbot application featuring a Next.js frontend, a FastAPI authentication server (with SQLite and JWT), and a dedicated FastAPI chatbot backend powered by the Groq API (Llama 3).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```text
+.
+├── frontend/             # Next.js frontend application
+└── backend/
+    ├── Auth/             # FastAPI Authentication server (SQLite + JWT)
+    ├── chatbot/          # FastAPI Chatbot server (Groq LLM)
+    └── requirements.txt  # Consolidated Python dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+1. Clone the Repository
+First, clone the repository to your local machine:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
 
-## Learn More
+2. Set Up Environment Variables (.env)
+    You need to configure your secret keys for both the authentication and chatbot servers.
 
-To learn more about Next.js, take a look at the following resources:
+    Create a .env file in the backend/Auth directory AND the backend/chatbot directory (or point them to a shared one) and add the following variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    # Required for JWT Token generation (Auth Server)
+    SECRET_KEY="your-super-secret-jwt-key"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    # Required for Llama 3 Chatbot (Chatbot Server)
+    GROQ_API_KEY="gsk_your_actual_groq_api_key_here"
 
-## Deploy on Vercel
+3.Running the Application
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    To run the application locally, you will need to open three separate terminal windows: one for the Auth server, one for the Chatbot server, and one for the Frontend.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Terminal 1: Install Dependencies & Run the Auth Server (Port 8000)
+    This server handles user login, registration, password hashing, and JWT token generation.
+
+        # Navigate to the backend directory
+        cd backend
+
+        # Create and activate a virtual environment (Recommended)
+        python3 -m venv venv
+        source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+        # Install all backend dependencies
+        pip install -r requirements.txt
+
+        # Navigate to the Auth directory and run the server
+        cd Auth
+        uvicorn main:app --reload
+    
+    Terminal 2: Run the Chatbot Server (Port 8080)
+    This server securely connects to the Groq API to generate AI responses.
+        # Navigate to the backend directory
+        cd backend
+
+        # Activate the same virtual environment
+        source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+        # Navigate to the chatbot directory and run the server on port 8080
+        cd chatbot
+        uvicorn grog:app --reload --port 8080
+
+    Terminal 3: Run the Frontend (Next.js)
+    This runs the UI layer where users can log in, sign up, and chat.    
+        # Navigate to the frontend directory
+        cd frontend  
+
+        # Install dependencies
+        npm install
+
+        # Start the development server
+        npm run dev
+
+Tech Stack
+Frontend: Next.js, React, Tailwind CSS, shadcn/ui
+Backend: FastAPI (Python)
+Database: SQLite
+Authentication: JWT (JSON Web Tokens) with passlib/bcrypt
+AI/LLM: Groq API (Llama-3.1-8b-instant model)
